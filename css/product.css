@@ -1,0 +1,18 @@
+﻿.price
+{
+    font-size:medium;
+}
+#plus > a:link
+{
+    color:green; 
+    background-color:black; 
+    width:40px;
+    height:50px;
+    text-decoration:none
+    /*margin-bottom:10px;
+    border-radius:15px;
+    font-size:10px;
+    font-weight:bold;
+    background-color:#228B22;
+    border-color:#228B22;*/
+}
