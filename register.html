@@ -23,7 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/dropDownMenu.js" type="text/javascript"></script>
-    <script src="js/register.js" type="text/javascript"></script>
+    <!--<script src="js/register.js" type="text/javascript"></script>-->
     <script src="js/login.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -194,41 +194,43 @@
             <section class="container">
                 <div class="container-page">
                     <div class="col-md-6">
-                        <form role="form">
+                        <form role="form" method="POST" action="registeration.php">
                             <h3 class="dark-grey">ثبت نام</h3>
                             <div class="form-group col-lg-6">
                                 <label>نام</label>
-                                <input type="text" name="" class="form-control" id="rname" value="">
+                                <input type="text" name="rname" class="form-control" id="rname" value="">
                             </div>
 
                             <div class="form-group col-lg-6">
                                 <label>نام خانوادگی</label>
-                                <input type="text" name="" class="form-control" id="rfname" value="">
+                                <input type="text" name="rfname" class="form-control" id="rfname" value="">
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-6">
                                 <label>نام کاربری</label>
-                                <input type="text" name="" class="form-control" id="runame" value="">
+                                <input type="text" name="runame" class="form-control" id="runame" value="">
                             </div>
 
                             <div class="form-group col-lg-6">
                                 <label>رمز عبور</label>
-                                <input type="password" name="" class="form-control" id="rpass" value="">
+                                <input type="password" name="rpass" class="form-control" id="rpass" value="">
                             </div>
 
                             <div class="form-group col-lg-6">
                                 <label>تکرار رمز عبور</label>
-                                <input type="password" name="" class="form-control" id="rrpass" value="">
+                                <input type="password" name="rrpass" class="form-control" id="rrpass" value="">
                             </div>
-
-                            <div class="form-group col-lg-6">
-                                <label>آدرس ایمیل</label>
-                                <input type="text" name="" class="form-control" id="remail" value="">
-                            </div>
-
                             <div class="form-group col-lg-6">
                                 <label>شماره تماس </label>
-                                <input type="text" name="" class="form-control" id="rnumber" value="">
+                                <input type="text" name="rnumber" class="form-control" id="rnumber" value="">
+								
                             </div>                       
+							 <div class="form-group col-lg-12">
+                                <label>آدرس ایمیل</label>
+                                <input type="text" name="remail" class="form-control" id="remail" value="">
+                            </div>
+							<br/>
+								<br/>
+								<input type="submit" class="btn btn-primary" id="registeration" value="ثبت نام" name="registeration">
                         </form>
                     </div>
 
@@ -245,7 +247,10 @@
                         </p>
                 
 
-                        <button type="submit" class="btn btn-primary" id="registeration">ثبت نام</button>
+                       
+						
+						
+						
                     </div>
                 </div>
             </section>
