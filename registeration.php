@@ -37,8 +37,8 @@ function SignUp(){
 	}
 	else if(!empty($_POST['runame']) ){ //checking the 'user' name which is from Sign-Up.html, is it empty or have some text 
 		$query = mysql_query("SELECT * FROM member WHERE userName = '$_POST[runame]' ") or die(mysql_error());
-		if(!$row = (mysql_fetch_array($query) or die(mysql_error()))){
-			newuser(); 
+		if(!$row = mysql_fetch_array($query)){
+			NewUser(); 
 		} 
 		else{ 
 			echo "این نام کاربری قبلا استفاده شده است."; 
