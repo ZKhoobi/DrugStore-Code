@@ -1,5 +1,4 @@
 ﻿<?php
-//include ( 'register.html' );
 $host="localhost";
 $user="root";
 $password="";
@@ -24,7 +23,7 @@ function NewUser(){
 	$query = "INSERT INTO member (memberID,active,userName,password,email,name,familyName,phoneNumber,address) VALUES ('',$active,'$userName','$password','$email','$name','$familyName','$phoneNumber','$address')"; 
 	$data = mysql_query ($query)or die(mysql_error()); 
 	if($data){ 
-		die(msg(0,"ثبت نام با موفقیت انجام شد."));
+		die(msg(1,"ثبت نام با موفقیت انجام شد."));
 	} 
 } 
 function SignUp(){ 

@@ -16,6 +16,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main_page.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+	<link href="css/lg.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-rtl.min.css">
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
@@ -42,10 +43,10 @@
                 <img src="images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
                 <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor profile">حساب شخصی<i class="fa fa-user"></i></button>
-                <a href="profile.html" style="float: left; background-color: #228B22" class="btn btn-info aliprofile" role="button">علی علوی<i class="fa fa-user"></i></a>
+                <!-- <button type="button" style="float:left" class="btn btn-default btncolor profile">حساب شخصی<i class="fa fa-user"></i></button> -->
+                <a href="profile.html" style="float: left; background-color: #228B22" class="btn btn-info aliprofile" role="button" id="lgname">حساب شخصی<i class="fa fa-user"></i></a>
                 <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn">ورود<i class="fa fa-lock"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor" id="lgout">خروج<i class="fa fa-lock"></i></button>
+                <!-- <button type="button" style="float:left" class="btn btn-default btncolor" id="lgout">خروج<i class="fa fa-lock"></i></button> -->
 
                     <form class="navbar-form" role="search" style="padding-right: 78%; padding-top:0.0001%;" >
                         <div class="input-group">
@@ -67,25 +68,27 @@
                           <h4><span class="glyphicon glyphicon-lock"></span> ورود</h4>
                         </div>
                         <div class="modal-body" style="padding:40px 50px;">
-                          <form role="form">
+                          <form method="POST" action="login.php" id="lgForm">
                             <div class="form-group">
                               <label for="usrname"><span class="glyphicon glyphicon-user"></span> نام کاربری</label>
-                              <input type="text" class="form-control" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
+                              <input type="text" class="form-control" name="usrname" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
                             </div>
                             <div class="form-group">
                               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> رمز عبور</label>
-                              <input type="password" class="form-control" id="psw" placeholder="رمز عبور را وارد کنید">
+                              <input type="password" class="form-control" id="psw" name="psw" placeholder="رمز عبور را وارد کنید">
                             </div>
                             <div class="checkbox">
                               <label><input type="checkbox" value="" checked>مرا به خاطر بسپار</label>
                             </div>
-                              <button type="submit" class="btn btn-success btn-block" id="lgin"><span class="glyphicon glyphicon-off"></span>ورود</button>
+                              <input type="submit" class="btn btn-success btn-block" id="lgin" name="lgin" value="ورود"/><!-- <span class="glyphicon glyphicon-off"></span> -->
+							  <br />
+							  <div class="alert alert-danger" id="error">
+							    
+							  </div>
+							  <!-- <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button> -->
+							  <p>عضو نیستید؟  <a href="register.html">ثبت نام</a></p>
+							  <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                           </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button>
-                          <p>عضو نیستید؟  <a href="register.html">ثبت نام</a></p>
-                          <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                         </div>
                       </div>
       

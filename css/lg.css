@@ -1,0 +1,18 @@
+﻿#lgname{
+	visibility: visible;
+}
+/* #account{
+	visibility: visible;
+} */
+/* #lgout{
+	visibility: hidden;
+} */
+#myBtn{
+	visibility: visible;
+}
+#error{
+	visibility: hidden;
+}
+#loading{
+	visibility: hidden;
+}

@@ -1,55 +1,57 @@
-﻿
-var login = 0;
-$(document).ready(function () {
-    //for buying things you should first login
-    $("#lgout").hide();
-    $("#myBtn").show();
-    $(".profile").show();
-    $(".aliprofile").hide();
-    $("#myBtn").click(function () {
+﻿$(document).ready(function(){
+	$("#myBtn").click(function () {
         $("#myModal").modal();
+		$('#lgForm').submit(function(e) {
+		lgin();
+		e.preventDefault();
+		
+		});
     });
-
-    $("#lgin").click(function (evt) {
-        if ("alahmad" == $("#usrname").val() || "admin" == $("#psw").val()) {
-            window.open( "../DrugStore-master/management_panel/manage_employer.html");
-            window.close(this);
-            login = 2;
-        }
-        else if ("ali" != $("#usrname").val() || "123" != $("#psw").val())
-        {
-            alert("نام کاربری یا رمز عبور اشتباه وارد شده است. لطفا دوباره وارد کنید.");
-        }
-        else
-        {
-
-            $("#myModal").modal('hide');
-            evt.preventDefault();
-            $(".profile").hide();
-            $(".aliprofile").show();
-            $("#lgout").show();
-            $("#myBtn").hide();
-            login = 1;
-        }
-
-    });
-
-
-    $("#lgout").click(function () {
-        $("#lgout").hide();
-        $("#myBtn").show();
-        $(".profile").show();
-        $(".aliprofile").hide();
-        $("#usrname").val('');
-        $("#psw").val('');
-        login = 0;
-    });
-
-    $("#btn_search").click(function () {
-        if ($("#in_search").val() != "")
-        {
-            window.open("https://www.google.com/#q=drugstore+%2B+"+$("#in_search").val());
-            window.close(this);
-        }
-    });
+	
+	
 });
+
+
+function lgin()
+{
+	hideshow('loading',1);
+	error(0);
+	$.ajax({
+		type: "POST",
+		url: "login.php",
+		data: $('#lgForm').serialize(),
+		dataType: "json",
+		success: function(msg){
+			if(parseInt(msg.status)==1)
+			{
+				success(0,msg.txt);
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				
+				error(1,msg.txt);
+			}
+			
+			hideshow('loading',0);
+		}
+	});
+}
+
+
+function hideshow(el,act)
+{
+	if(act) $('#'+el).css('visibility','visible');
+	else $('#'+el).css('visibility','hidden');
+}
+
+function error(act,txt)
+{
+	hideshow('error',act);
+	if(txt) $('#error').html(txt);
+}
+function success(act,txt)
+{
+	$("#myModal").modal('hide');
+	if(txt) $('#myBtn').html('خروج');
+	if(txt) $('#lgname').html(txt);
+}

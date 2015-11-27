@@ -38,7 +38,7 @@ function register()
 			
 			if(parseInt(msg.status)==1)
 			{
-				window.location=msg.txt;
+				success(1,msg.txt);
 			}
 			else if(parseInt(msg.status)==0)
 			{
@@ -61,4 +61,9 @@ function error(act,txt)
 {
 	hideshow('error',act);
 	if(txt) $('#error').html(txt);
+}
+function success(act,txt)
+{
+	hideshow('success',act);
+	if(txt) $('#success').html(txt);
 }
