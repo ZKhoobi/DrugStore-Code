@@ -1,0 +1,29 @@
+﻿.price
+{
+    font-size:medium;
+}
+#plus
+{
+    color:green; 
+    background-color:transparent; 
+    margin-left:10px;
+    /*margin-bottom:10px;
+    border-radius:15px;
+    font-size:10px;
+    font-weight:bold;
+    background-color:#228B22;
+    border-color:#228B22;*/
+}
+#plus1
+{
+    color:green; 
+    background-color:transparent; 
+    margin-left:10px;
+    border-color:green;
+    /*margin-bottom:10px;
+    border-radius:15px;
+    font-size:10px;
+    font-weight:bold;
+    background-color:#228B22;
+    border-color:#228B22;*/
+}

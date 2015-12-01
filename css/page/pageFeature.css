@@ -1,0 +1,149 @@
+﻿.top-search {
+}
+
+.top-search input {
+	width: 180px;
+	font-size: 11px;
+	color: #888;
+}
+
+.search-btn {
+	float: left;
+	position: relative;
+	background: url('../images/search.png') center center no-repeat;
+	width: 28px;
+	height: 28px;
+    padding-top: 30px;
+	cursor: pointer;
+	border: none;
+	z-index: 100;
+	box-shadow: none;
+}
+
+.search-field {
+	float: left;
+    height: 30px;
+    width: 200px;
+	position: relative;
+}
+#mytab{
+    margin-bottom:20px;
+}
+.modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  input { 
+      text-align:right; 
+  }
+  .right{
+      float:right;
+  }
+  .BMitra{
+      font-family:'B Mitra';
+  }
+  .btn{
+    margin:0 10px 0 10px;
+}
+.btncolor{
+    background-color:#228B22;
+    color:#fff;
+}
+#commentSubmit:hover {
+background-color: #09466f;
+
+}
+  /*...................................comment form.........................*/
+
+
+ /*#wrap{
+border: 1px solid lightgray;
+alignment-adjust: central;
+width: 1000px;
+margin-left: 50px;
+margin-top: 80px;
+box-shadow: 0 5px 0 #e6e6e6;
+padding-bottom: 50px;
+
+}*/
+/*h1{
+color: blue-violet;
+text-align: center;
+}*/
+
+/*h3.heading{
+margin:0 60px 0 0;
+background-color: #fafafa;
+font-size: 25px;
+float: right;
+padding:5px 60px 0 0px;
+position: relative;
+width: 350px;
+height: 40px;
+
+
+}*/
+/*#upper_blank{
+border-bottom: 7px solid steelblue;
+margin-top:30px;
+width: 570px;
+}*/
+/*p{
+margin-left: 5px;
+padding: 8px;
+padding-left: 20px;
+
+}*/
+/*#name{
+margin:10px 20px 10px 20px;
+box-shadow: 0 2px 0 #e6e6e6;
+height: 40px;
+padding-left: 10px;
+width: 500px;
+}
+#email{
+margin:10px 20px 10px 20px;
+box-shadow: 0 2px 0 #e6e6e6;
+height: 40px;
+padding-left: 10px;
+width: 500px;
+}
+#comment{
+margin:10px 20px 10px 20px;
+box-shadow: 0 2px 0 #e6e6e6;
+height: 40px;
+padding-left: 10px;
+width: 650px;
+height: 200px;
+}
+#commentSubmit{
+margin-right: 70px;
+width: 100px;
+height: 55px;
+color: white;
+font-size: 20px;
+background-color: #228B22;
+box-shadow: 0 3px 0 #09466f;
+margin-bottom: 30px;
+padding-left: 20px;
+border-radius: 5px;
+}*/
+
+
+/*p{
+font-size: 18px;
+color: gray;
+padding-bottom: 15px;
+padding-top: 15px;
+}
+p1{
+font-size: 18px;
+padding-top: 20px;
+}*/
+
+
