@@ -25,7 +25,7 @@ else{
 		$_SESSION['family']=$familyName;
 		$_SESSION['id']=$row['memberID'];
 		$query = mysql_query("UPDATE member SET active = '1' WHERE userName = '$_POST[usrname]' AND password = '$_POST[psw]' ") or die(mysql_error());
-		$temp = $name . $familyName;
+		$temp = $name . ' ' . $familyName;
 		die(msg(1, $temp));
 	}
 	else{

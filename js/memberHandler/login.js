@@ -11,12 +11,29 @@ $(document).ready(function(){
 		}
 		if(login==1)
 		{
-			
+			lgout();
+			e.preventDefault();
 		}
 	});
 	
 });
 
+function lgout()
+{
+	$.ajax({
+		type: "POST",
+		url: "logout.php",
+		data: $('#myBtn').serialize(),
+		dataType: "json",
+		success: function(msg){
+			if(parseInt(msg.status)==1)
+			{
+				login=0;
+				successout(0,msg.txt);
+			}
+		}
+	});
+}
 
 function lgin()
 {
@@ -59,6 +76,11 @@ function error(act,txt)
 function success(act,txt)
 {
 	$("#myModal").modal('hide');
-	if(txt) $('#myBtn').html('خروج');
-	if(txt) $('#lgname').html(txt);
+	if(txt) $('#myBtn').html('خروج<i class="fa fa-lock"></i>');
+	if(txt) $('#lgname').html(txt+'<i class="fa fa-user"></i>');
+}
+function successout(act,txt)
+{
+	if(txt) $('#myBtn').html('ورود<i class="fa fa-lock"></i>');
+	if(txt) $('#lgname').html('حساب شخصی<i class="fa fa-user"></i>');
 }
