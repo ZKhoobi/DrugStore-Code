@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2015 at 03:52 PM
+-- Generation Time: Dec 04, 2015 at 10:09 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -43,7 +43,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`memberID`, `active`, `userName`, `password`, `email`, `name`, `familyName`, `phoneNumber`, `address`) VALUES
-(27, '0', 'niousha', '123', '123', 'نیوشا', 'عطار', 123, ''),
+(27, '0', 'niousha', '123', 'n@yahoo.com', 'نیوشا', 'عطار', 123, ''),
 (37, '0', 'c', 'c', 'a@yahoo.com', 'c', 'c', 123, ''),
 (35, '0', 'b', 'b', 'a@yahoo.com', 'b', 'b', 123, ''),
 (36, '0', 'a', 'a', 'a@yahoo.com', 'a', 'a', 123, ''),
@@ -96,7 +96,7 @@ ALTER TABLE `product_orto`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
