@@ -23,7 +23,7 @@ function NewUser(){
 	$query = "INSERT INTO member (memberID,active,userName,password,email,name,familyName,phoneNumber,address) VALUES ('',$active,'$userName','$password','$email','$name','$familyName','$phoneNumber','$address')"; 
 	$data = mysql_query ($query)or die(mysql_error()); 
 	if($data){ 
-		die(msg(1,"ثبت نام با موفقیت انجام شد."));
+		die(msg(1,"ثبت نام با موفقیت انجام شد. برای ورود به سایت از سایر صفحات وارد شوید."));
 	} 
 } 
 function SignUp(){ 

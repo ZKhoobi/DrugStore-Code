@@ -18,6 +18,7 @@ if($row["active"]==1)
 {
 	$id = $_SESSION['id'];
 	$query = mysql_query("UPDATE member SET active = '0' WHERE memberID = '$id' ") or die(mysql_error());
+	session_destroy();
 	die(msg(1, "حساب شخصی"));
 }
 //}

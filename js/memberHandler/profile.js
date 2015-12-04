@@ -8,7 +8,8 @@
         $("remail").val('');
         $("rnumber").val('');
         alert("تغییرات ثبت شد.");
-        window.location = "profile.html";
+		alert("just prototype dataBase does not change!");
+        window.location = "profile.php";
         
     });
 });

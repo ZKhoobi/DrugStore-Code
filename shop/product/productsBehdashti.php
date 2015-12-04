@@ -9,13 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>داروخانه دکتر آل احمد - ارتوپدی</title>
+    <title>داروخانه دکتر آل احمد - بهداشتی</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../fonts/farsi.css" rel="stylesheet" type="text/css"  />
+	<link href="../../fonts/farsi.css" rel="stylesheet" type="text/css"  />
     <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/page/pageFeature.css" rel="stylesheet">
     <link href="../../css/page/animate.css" rel="stylesheet">
+	<link href="../../css/memberHandler/lg.css" rel="stylesheet">
     <link href="../../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" >
     <link href="../../css/shop/shopHomepage.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -24,7 +25,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../js/page/dropDownMenu.js" type="text/javascript"></script>
-    <script src="../../js/memberHandler/login.js" type="text/javascript"></script>
+    <script src="../../js/memberHandler/loginProduct.js" type="text/javascript"></script>
+	<script src="../../js/memberHandler/accessProfileProduct.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,17 +38,32 @@
 </head>
 
 <body>
-
+	<?php
+	session_start();
+	if(isset($_SESSION['name']) && !empty($_SESSION['name']) && isset($_SESSION['family']) && !empty($_SESSION['family']))
+	{
+		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
+		$status = "خروج";
+		$login = 1;
+	}
+	else
+	{
+		$user = "حساب شخصی";
+		$status = "ورود";
+		$login = 0;
+	}
+	?>
+	<script>
+		login = <?php echo $login; ?>
+	</script>
     <!-- Navigation -->
     <div class="container">
         <div id="header" dir="rtl">
                 <img src="../../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
                 <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor profile">حساب شخصی<i class="fa fa-user"></i></button>
-                <a href="../../memberHandler/profile.html" style="float: left; background-color: #228B22" class="btn btn-info aliprofile" role="button">علی علوی<i class="fa fa-user"></i></a>
-                <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn">ورود<i class="fa fa-lock"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor" id="lgout">خروج<i class="fa fa-lock"></i></button>
+                <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
+                <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>
 
                     <form class="navbar-form" role="search" style="padding-right: 78%; padding-top:0.0001%;" >
                         <div class="input-group">
@@ -68,25 +85,26 @@
                           <h4><span class="glyphicon glyphicon-lock"></span> ورود</h4>
                         </div>
                         <div class="modal-body" style="padding:40px 50px;">
-                          <form role="form">
+                          <form method="POST" action="login.php" id="lgForm">
                             <div class="form-group">
                               <label for="usrname"><span class="glyphicon glyphicon-user"></span> نام کاربری</label>
-                              <input type="text" class="form-control" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
+                              <input type="text" class="form-control" name="usrname" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
                             </div>
                             <div class="form-group">
                               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> رمز عبور</label>
-                              <input type="password" class="form-control" id="psw" placeholder="رمز عبور را وارد کنید">
+                              <input type="password" class="form-control" id="psw" name="psw" placeholder="رمز عبور را وارد کنید">
                             </div>
                             <div class="checkbox">
                               <label><input type="checkbox" value="" checked>مرا به خاطر بسپار</label>
                             </div>
-                              <button type="submit" class="btn btn-success btn-block" id="lgin"><span class="glyphicon glyphicon-off"></span>ورود</button>
+                              <input type="submit" class="btn btn-success btn-block" id="lgin" name="lgin" value="ورود"/><!-- <span class="glyphicon glyphicon-off"></span> -->
+							  <br />
+							  <div class="alert alert-danger" id="error">
+							  </div>
+							  <!-- <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button> -->
+							  <p>عضو نیستید؟  <a href="../../memberHandler/register.php">ثبت نام</a></p>
+							  <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                           </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button>
-                          <p>عضو نیستید؟  <a href="../../memberHandler/register.html">ثبت نام</a></p>
-                          <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                         </div>
                       </div>
       
@@ -112,29 +130,29 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" style="font-size:large; font-family:'B Mitra'">
                     <li>
-                        <a href="../../index.html">صفحه اصلی <i class="fa fa-home"></i></a>
+                        <a href="../../index.php">صفحه اصلی <i class="fa fa-home"></i></a>
                     </li>
                     <li class="dropdown active">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
-                        <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="#" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="productsArayeshi.html" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="productsBehdashti.html" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="productsTajhizat.html" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="productsMokamel.html" style="direction:rtl">مکمل های دارویی</a></li>
+                        <ul class="dropdown-menu">
+                            <li style="direction:rtl"><a href="productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
+                            <li><a href="productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
+                            <li><a href="#" style="direction:rtl">بهداشتی</a></li>
+                            <li><a href="productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
+                            <li><a href="productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">سوالات دارویی <i class="fa fa-question-circle"></i></a>
                     </li>
                     <li>
-                        <a href="../../aboutUs/aboutUs.html">درباره ما <i class="fa fa-info-circle"></i></a>
+                        <a href="../aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
                     </li>
                     <li>
-                        <a href="../../contact/contact.html">تماس با ما <i class="fa fa-phone"></i></a>
+                        <a href="../contact/contact.php">تماس با ما <i class="fa fa-phone"></i></a>
                     </li>
                     <li>
-                        <a href="../../comment/comment.html">نظرات <i class="fa fa-commenting"></i></a>
+                        <a href="../comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
                     </li>
                 </ul>
             </div>
@@ -149,15 +167,15 @@
         <!------------container------->
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="oneProduct.html"><img src="../../images/ortopedy/1.jpg" alt="" /></a>
+                            <a href="#"><img src="../../images/behdashti/6.png" alt="" /></a>
                            <!-- <div class="caption">-->
                                 <p><br />نام و توضیح مختصری از محصول...</p>
-                                <a href="oneProduct.html" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
+                                <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
                                 <p class="price">4,000 تومان</p>
                                 
                            <!-- </div>-->
                             <div class="ratings">
-                                <p class="pull-right">15 مشاهده</p>
+                                <p class="pull-right">15 reviews</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -172,7 +190,7 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="../../images/ortopedy/2.jpg" alt="" /></a>
+                            <a href="#"><img src="../../images/behdashti/2.png" alt="" /></a>
                             <!-- <div class="caption">-->
                             <p><br />نام و توضیح مختصری از محصول...</p>
                             <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
@@ -194,7 +212,7 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="../../images/ortopedy/3.jpg" alt="" /></a>
+                            <a href="#"><img src="../../images/behdashti/3.png" alt="" /></a>
                             <!-- <div class="caption">-->
                             <p><br />نام و توضیح مختصری از محصول...</p>
                             <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
@@ -216,7 +234,7 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="../../images/ortopedy/4.jpg" alt="" /></a>
+                            <a href="#"><img src="../../images/behdashti/4.png" alt="" /></a>
                             <!-- <div class="caption">-->
                             <p><br />نام و توضیح مختصری از محصول...</p>
                             <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
@@ -238,7 +256,7 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="../../images/ortopedy/5.jpg" alt="" /></a>
+                            <a href="#"><img src="../../images/behdashti/5.png" alt="" /></a>
                             <!-- <div class="caption">-->
                             <p><br />نام و توضیح مختصری از محصول...</p>
                             <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>

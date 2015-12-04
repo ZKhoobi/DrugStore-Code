@@ -68,7 +68,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button>
-                          <p>عضو نیستید؟  <a href="../memberHandler/register.html">ثبت نام</a></p>
+                          <p>عضو نیستید؟  <a href="../memberHandler/register.php">ثبت نام</a></p>
                           <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                         </div>
                       </div>
@@ -94,13 +94,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" style="font-size:large; font-family:'B Mitra'">
                     <li>
-                        <a href="manageEmployer.html">مدیریت کارمندان<i class="fa fa-home"></i></a>
+                        <a href="manageEmployer.php">مدیریت کارمندان<i class="fa fa-home"></i></a>
                     </li>
                     <li>
-                        <a href="manageProduct.html">مدیریت کالاها<i class="fa fa-medkit"></i></a>
+                        <a href="manageProduct.php">مدیریت کالاها<i class="fa fa-medkit"></i></a>
                     </li>
                     <li  class="active">
-                        <a href="manageComment.html">مشاهده نظرات<i class="fa fa-commenting"></i></a>
+                        <a href="manageComment.php">مشاهده نظرات<i class="fa fa-commenting"></i></a>
                     </li>
                 </ul>
                 <!--search mitune inja ham bashe!-->

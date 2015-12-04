@@ -9,21 +9,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>داروخانه دکتر آل احمد - صفحه اصلی</title>
+    <title>داروخانه دکتر آل احمد - تماس با ما</title>
 
-    <!-- CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="../fonts/farsi.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="../css/page/pageFeature.css" rel="stylesheet">
     <link href="../css/page/animate.css" rel="stylesheet">
-    <link href="../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"  />
+	<link href="../css/memberHandler/lg.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
     <link href="../css/shop/shopHomepage.css" rel="stylesheet">
-	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 	<!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/page/dropDownMenu.js" type="text/javascript"></script>
-    <script src="../js/memberHandler/login.js" type="text/javascript"></script>
+    <script src="../js/memberHandler/loginACC.js" type="text/javascript"></script>
+	<script src="../js/memberHandler/accessProfileACC.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,17 +37,32 @@
 </head>
 
 <body>
-    
+	<?php
+	session_start();
+	if(isset($_SESSION['name']) && !empty($_SESSION['name']) && isset($_SESSION['family']) && !empty($_SESSION['family']))
+	{
+		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
+		$status = "خروج";
+		$login = 1;
+	}
+	else
+	{
+		$user = "حساب شخصی";
+		$status = "ورود";
+		$login = 0;
+	}
+	?>
+	<script>
+		login = <?php echo $login; ?>
+	</script>
     <!-- Navigation -->
     <div class="container">
         <div id="header" dir="rtl">
                 <img src="../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
                 <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor profile">حساب شخصی<i class="fa fa-user"></i></button>
-                <a href="../memberHandler/profile.html" style="float: left; background-color: #228B22" class="btn btn-info aliprofile" role="button">علی علوی<i class="fa fa-user"></i></a>
-                <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn">ورود<i class="fa fa-lock"></i></button>
-                <button type="button" style="float:left" class="btn btn-default btncolor" id="lgout">خروج<i class="fa fa-lock"></i></button>
+                <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
+                <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>
 
                     <form class="navbar-form" role="search" style="padding-right: 78%; padding-top:0.0001%;" >
                         <div class="input-group">
@@ -67,25 +84,26 @@
                           <h4><span class="glyphicon glyphicon-lock"></span> ورود</h4>
                         </div>
                         <div class="modal-body" style="padding:40px 50px;">
-                          <form role="form">
+                          <form method="POST" action="login.php" id="lgForm">
                             <div class="form-group">
                               <label for="usrname"><span class="glyphicon glyphicon-user"></span> نام کاربری</label>
-                              <input type="text" class="form-control" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
+                              <input type="text" class="form-control" name="usrname" id="usrname" placeholder="نام کاربری یا ایمیل خود را وارد کنید">
                             </div>
                             <div class="form-group">
                               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> رمز عبور</label>
-                              <input type="password" class="form-control" id="psw" placeholder="رمز عبور را وارد کنید">
+                              <input type="password" class="form-control" id="psw" name="psw" placeholder="رمز عبور را وارد کنید">
                             </div>
                             <div class="checkbox">
                               <label><input type="checkbox" value="" checked>مرا به خاطر بسپار</label>
                             </div>
-                              <button type="submit" class="btn btn-success btn-block" id="lgin"><span class="glyphicon glyphicon-off"></span>ورود</button>
+                              <input type="submit" class="btn btn-success btn-block" id="lgin" name="lgin" value="ورود"/><!-- <span class="glyphicon glyphicon-off"></span> -->
+							  <br />
+							  <div class="alert alert-danger" id="error">
+							  </div>
+							  <!-- <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button> -->
+							  <p>عضو نیستید؟  <a href="../memberHandler/register.php">ثبت نام</a></p>
+							  <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                           </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button>
-                          <p>عضو نیستید؟  <a href="../memberHandler/register.html">ثبت نام</a></p>
-                          <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                         </div>
                       </div>
       
@@ -111,29 +129,29 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" style="font-size:large; font-family:'B Mitra'">
                     <li>
-                        <a href="../index.html">صفحه اصلی <i class="fa fa-home"></i></a>
+                        <a href="../index.php">صفحه اصلی <i class="fa fa-home"></i></a>
                     </li>
                     <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="../shop/product/productsOrtopedy.html" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="../shop/product/productsArayeshi.html" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="../shop/product/productsBehdashti.html" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="../shop/product/productsTajhizat.html" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="../shop/product/productsMokamel.html" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li style="direction:rtl"><a href="../shop/product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
+                            <li><a href="../shop/product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
+                            <li><a href="../shop/product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
+                            <li><a href="../shop/product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">سوالات دارویی <i class="fa fa-question-circle"></i></a>
                     </li>
+                    <li>
+                        <a href="../aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
+                    </li>
                     <li class="active">
-                        <a href="#">درباره ما <i class="fa fa-info-circle"></i></a>
+                        <a href="../contact/contact.php">تماس با ما <i class="fa fa-phone"></i></a>
                     </li>
                     <li>
-                        <a href="../contact/contact.html">تماس با ما <i class="fa fa-phone"></i></a>
-                    </li>
-                    <li>
-                        <a href="../comment/comment.html">نظرات <i class="fa fa-commenting"></i></a>
+                        <a href="../comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
                     </li>
                 </ul>
             </div>
@@ -141,35 +159,37 @@
           </div>
         <!-- /.container -->
     </nav>
-    <!--page content-->
+    
+   
+    <!-- Page Content -->
     <div class="container">
-        <div class="col-md-2 ">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+            <img src="../images/map.png" alt=" آدرس: تهران - خیابان شهید باهنر - رو به روی شهر کتاب - پلاک 110" />
+            <br />
+            <br />
+            <section>
+                <h3> آدرس&nbsp;<i class="fa fa-street-view fa-lg"></i></h3>
+                <p>تجریش - خیابان شهید باهنر - رو به روی شهر کتاب - پلاک 110 - داروخانه دکتر سادات آل احمد</p>
+                <h3>تلفن تماس&nbsp;<i class="fa fa-phone-square fa-lg"></i></h3>
+                <p>22801560</p>
+                <h3>نمابر&nbsp;<i class="fa fa-fax fa-lg"></i></h3>
+                <p>22801558</p>
+                <h3>ساعات کاری&nbsp;<i class="fa fa-clock-o fa-lg"></i></h3>
+                <p>همه روزه (به جز ایام تعطیل) 8:30 الی 13:30 - 15:30 الی 20:30</p>
+
+            </section>
+
+        </div>
+        </div>
+        <div class="col-lg-1">
+        </div> 
+        
             
-        </div>
-        <div class="col-md-8 panel panel-default" style="background-color:#98d850">
-            <h2>داروخانه ی دکتر سادات آل احمد<img src="../images/logo.png" alt="Nevia Premium Template" width="44" height="50"  style="float:right ; vertical-align:bottom"/></h2>
-            <br />
-            <br />
-            <br />
+    
+    <!-- /.container -->
 
-            <section>
-                <p style="font-size:20px"><i class="fa fa-circle "></i>	در فهرست 10 داروخانه ی برتر کشور</p>
-            </section>
-            <section>
-                <p style="font-size:20px"><i class="fa fa-circle"></i>	داروخانه ی پیشرو در راه اندازی اتاق مشاوره بیمار و مشاوره رایگان</p>
-            </section>
-            <section>
-                <p style="font-size:20px"><i class="fa fa-circle"></i>	با مدیریت:</p>
-                <h5>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-o"></i><img src="../images/taghdir.jpg" style="float:left" /> داروساز نمونه</h5>
-                  <h5>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-o"></i>  	همکار آموزشی دانشگاه شهید بهشتی</h5>
-                
-            </section>
-        </div>
-        <div class="col-md-2 ">
-
-        </div>
-    </div>
-    <!--Footer-->
     <div class="container">
 
         <hr>
@@ -184,5 +204,14 @@
         </footer>
 
     </div>
+  
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    
+
+    <!-- Bootstrap Core JavaScript -->
+    
 </body>
+
 </html>
