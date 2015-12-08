@@ -83,4 +83,5 @@ function successout(act,txt)
 {
 	if(txt) $('#myBtn').html('ورود<i class="fa fa-lock"></i>');
 	if(txt) $('#lgname').html('حساب شخصی<i class="fa fa-user"></i>');
+	location.reload(true);
 }

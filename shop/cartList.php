@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
+
+
 <html lang="en">
+
 
 <head>
 
@@ -166,83 +169,56 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-10 col-md-offset-1">
-                <table class="table table-hover" id="cartTable">
-                    <thead>
-                        <tr>
-                            <th>محصول</th>
-                            <th>تعداد</th>
-                            <th class="text-center">قیمت(ریال)</th>
-                            <th class="text-center">جمع(ریال)</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="row1">
-                            <td class="col-sm-8 col-md-6">
-                                <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="#">نام محصول</a></h4>
-                                        <h5 class="media-heading"> <a href="#">نام شرکت</a></h5>
-                                        <!--<span>Status: </span><span class="text-success"><strong>In Stock</strong></span>-->
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                            </td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong>2000</strong></td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong>6000</strong></td>
-                            <td class="col-sm-1 col-md-1">
-                                <button type="button" class="btn btn-danger" id="del1">
-                                    <span class="glyphicon glyphicon-remove"></span> حذف کالا
-                                </button>
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td class="col-md-6">
-                                <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="#">نام محصول</a></h4>
-                                        <h5 class="media-heading"><a href="#">نام شرکت</a></h5>
-                                        <!--<span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>-->
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="col-md-1" style="text-align: center">
-                                <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                            </td>
-                            <td class="col-md-1 text-center"><strong>4000</strong></td>
-                            <td class="col-md-1 text-center"><strong>8000</strong></td>
-                            <td class="col-md-1">
-                                <button type="button" class="btn btn-danger" id="del2">
-                                    <span class="glyphicon glyphicon-remove"></span> حذف کالا
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td>   </td>
-                            <td><h5>جمع کل</h5></td>
-                            <td class="text-right" ><h5><strong id="sum">14000</strong></h5></td>
-                        </tr>
-                        <tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td>   </td>
-                            <td><h5>هزینه حمل</h5></td>
-                            <td class="text-right"><h5><strong>2000</strong></h5></td>
-                        </tr>
-                        <tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td>   </td>
-                            <td><h3>مبلغ پرداختی</h3></td>
-                            <td class="text-right"><h3><strong id="sum1">16000</strong></h3></td>
-                        </tr>
-                        <tr>
+				<?php
+				if(isset($_SESSION["cart_item"])){
+					$item_total = 0;
+					$_SESSION['itemNumber'] = 0;
+				?>	
+				<table class="table table-hover" id="cartTable">
+				<tbody>
+					<tr>
+                        <th><strong>نام کالا</strong></th>
+						<th style="text-align: center"><strong>کد کالا</strong></th>
+						<th style="text-align: center"><strong>تعداد</strong></th>
+						<th style="text-align: center"><strong>قیمت</strong></th>
+						<th style="text-align: center"><strong>تغییرات</strong></th>
+                    </tr>
+				<?php		
+					foreach ($_SESSION["cart_item"] as $item){
+				?>
+							<tr>
+								<td class="col-sm-8 col-md-6">
+									<strong><?php echo $item["name"]; ?></strong>
+								</td>
+								<td class="col-sm-1 col-md-1" style="text-align: center">
+									<?php echo $item["code"]; ?>
+								</td>
+								<td class="col-sm-1 col-md-1" style="text-align: center">
+									<?php echo $item["quantity"]; ?>
+								</td>
+								<td class="col-sm-1 col-md-1" style="text-align: center">
+									<?php echo "$".$item["price"]; ?>
+								</td>
+								<td class="col-sm-1 col-md-1">
+									<a href="product/productsArayeshi.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">حذف کالا</a>
+								</td>
+							</tr>
+				<?php
+					$_SESSION['itemNumber'] += $item["quantity"];
+					$item_total += ($item["price"]*$item["quantity"]);
+					}
+				?>
+
+				<tr>
+					<td colspan="5" align=left><strong>جمع کل:</strong> <?php echo "$".$item_total; ?></td>
+				</tr>
+				</tbody>
+				</table>		
+				  <?php
+				}
+				?>
+                    
+                        <!--<tr>
                             <td>   </td>
                             <td>   </td>
                             <td>   </td>
@@ -256,9 +232,8 @@
                                     تایید نهایی خرید  <span class="glyphicon glyphicon-play"></span>
                                 </button>
                             </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </tr>-->
+                
             </div>
         </div>
     </div>
