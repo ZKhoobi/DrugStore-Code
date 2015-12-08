@@ -29,7 +29,7 @@
     <script src="../js/page/dropDownMenu.js" type="text/javascript"></script>
     <script src="../js/memberHandler/loginACC.js" type="text/javascript"></script>
 	<script src="../js/memberHandler/accessProfileACC.js" type="text/javascript"></script>
-    <script src="../js/shop/cartlist.js" type="text/javascript"></script>
+    <!--<script src="../js/shop/cartlist.js" type="text/javascript"></script>-->
     <script src="../js/shop/pay.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -181,7 +181,7 @@
 						<th style="text-align: center"><strong>کد کالا</strong></th>
 						<th style="text-align: center"><strong>تعداد</strong></th>
 						<th style="text-align: center"><strong>قیمت</strong></th>
-						<th style="text-align: center"><strong>تغییرات</strong></th>
+						<th><strong>تغییرات</strong></th>
                     </tr>
 				<?php		
 					foreach ($_SESSION["cart_item"] as $item){
@@ -200,7 +200,7 @@
 									<?php echo "$".$item["price"]; ?>
 								</td>
 								<td class="col-sm-1 col-md-1">
-									<a href="product/productsArayeshi.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">حذف کالا</a>
+									<a  href="product/productsArayeshi.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction">حذف کالا</a>
 								</td>
 							</tr>
 				<?php
@@ -212,28 +212,23 @@
 				<tr>
 					<td colspan="5" align=left><strong>جمع کل:</strong> <?php echo "$".$item_total; ?></td>
 				</tr>
+						    
+                <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>   </td>        
+                    <td>   </td>                
+					<td>
+                        <button type="button" class="btn btn-success" id="checkout">
+                                تایید نهایی خرید  <i class="fa fa-check-square"></i>
+                        </button>
+                    </td>
+                </tr>
 				</tbody>
-				</table>		
-				  <?php
+				</table>
+                <?php
 				}
 				?>
-                    
-                        <!--<tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td>   </td>
-                            <td>
-                                <button type="button" class="btn btn-default">
-                                     ادامه خرید<i class="fa fa-shopping-cart"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success" id="checkout">
-                                    تایید نهایی خرید  <span class="glyphicon glyphicon-play"></span>
-                                </button>
-                            </td>
-                        </tr>-->
-                
             </div>
         </div>
     </div>

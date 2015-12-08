@@ -26,6 +26,7 @@
     <script src="../js/page/dropDownMenu.js" type="text/javascript"></script>
     <script src="../js/memberHandler/loginACC.js" type="text/javascript"></script>
 	<script src="../js/memberHandler/accessProfileACC.js" type="text/javascript"></script>
+	<script src="../js/shop/pay.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,9 +61,9 @@
         <div id="header" dir="rtl">
                 <img src="../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
-                <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
+                <!--<button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>-->
                 <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
-                <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>
+                <!--<button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>-->
 
                     <form class="navbar-form" role="search" style="padding-right: 78%; padding-top:0.0001%;" >
                         <div class="input-group">
@@ -289,7 +290,7 @@
                             </table>
                         </div>
                     </div>
-                    <a  class="btn btn-success" style="float:left" href="factor.php">ثبت اطلاعات ارسال</a>
+                    <button type="submit"  class="btn btn-success" style="float:left" id="bankPort">ثبت اطلاعات ارسال</a>
                 </form>
             </div>
         </div>
