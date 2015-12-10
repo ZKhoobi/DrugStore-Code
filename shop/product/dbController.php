@@ -4,7 +4,7 @@ class DBController {
 	private $user = "root";
 	private $password = "";
 	private $database = "drugstore";
-	
+	private $conn;
 	function __construct() {
 		$conn = $this->connectDB();
 		if(!empty($conn)) {
@@ -13,19 +13,19 @@ class DBController {
 	}
 	
 	function connectDB() {
-		$conn = mysql_connect($this->host,$this->user,$this->password);
-		return $conn;
+		$this->conn = mysqli_connect($this->host,$this->user,$this->password,$this->database);
+		return $this->conn;
 	}
 	
 	function selectDB($conn) {
-		mysql_select_db($this->database,$conn);
+		mysqli_select_db($this->conn,$this->database);
 	}
 	
 	function runQuery($query) {
-		$result = mysql_query($query);
+		$result = mysqli_query($this->conn,$query);
 		if($result)
 		{
-			while($row=mysql_fetch_assoc($result)) {
+			while($row=mysqli_fetch_assoc($result)) {
 				$resultset[] = $row;
 			}
 		}		
@@ -34,7 +34,7 @@ class DBController {
 	}
 	
 	function numRows($query) {
-		$result  = mysql_query($query);
+		$result  = mysql_query($conn,$query);
 		$rowcount = mysql_num_rows($result);
 		return $rowcount;	
 	}

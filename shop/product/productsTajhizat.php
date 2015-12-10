@@ -1,4 +1,51 @@
 ﻿<!DOCTYPE html>
+<?php
+session_start();
+require_once("dbController.php");
+$db_handle = new DBController();
+if(!empty($_GET["action"])) {
+switch($_GET["action"]) {
+	case "add":
+		if(!empty($_POST["quantity"])) {
+			$productByCode = $db_handle->runQuery("SELECT * FROM products WHERE code='" . $_GET["code"] . "'");
+			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
+			
+			if(!empty($_SESSION["cart_item"])) {
+				if(in_array($productByCode[0]["code"],$_SESSION["cart_item"])) 
+				{
+					foreach($_SESSION["cart_item"] as $k => $v) 
+					{
+							if($productByCode[0]["code"] == $k)
+								$_SESSION["cart_item"][$k]["quantity"] = $_POST["quantity"];
+					}
+				} 
+				else 
+				{
+					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+				}
+			} 
+			else 
+			{
+				$_SESSION["cart_item"] = $itemArray;
+			}
+		}
+	break;
+	case "remove":
+		if(!empty($_SESSION["cart_item"])) {
+			foreach($_SESSION["cart_item"] as $k => $v) {
+					if($_GET["code"] == $k)
+						unset($_SESSION["cart_item"][$k]);				
+					if(empty($_SESSION["cart_item"]))
+						unset($_SESSION["cart_item"]);
+			}
+		}
+	break;
+	case "empty":
+		unset($_SESSION["cart_item"]);
+	break;	
+}
+}
+?>
 <html lang="en">
 
 <head>
@@ -9,7 +56,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>داروخانه دکتر آل احمد - تجهیزات پزشکی</title>
+    <title>داروخانه دکتر آل احمد - آرایشی</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../fonts/farsi.css" rel="stylesheet" type="text/css"  />
@@ -26,7 +73,8 @@
     <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../js/page/dropDownMenu.js" type="text/javascript"></script>
     <script src="../../js/memberHandler/loginProduct.js" type="text/javascript"></script>
-	<script src="../../js/memberHandler/acessProfileProduct.js" type="text/javascript"></script>
+	<script src="../../js/memberHandler/accessProfileProduct.js" type="text/javascript"></script>
+	<script src="../../js/shop/addToCart.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,10 +84,9 @@
     <![endif]-->
 
 </head>
-
 <body>
 	<?php
-	session_start();
+	//session_start();
 	if(isset($_SESSION['name']) && !empty($_SESSION['name']) && isset($_SESSION['family']) && !empty($_SESSION['family']))
 	{
 		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
@@ -61,7 +108,7 @@
         <div id="header" dir="rtl">
                 <img src="../../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
-                <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
+                <button type="button" style="float:left" class="btn btn-default btncolor" id="cartIcon">سبد خرید<i class="fa fa-shopping-cart"></i>  <span class="badge" id="InCart"></span></button>
                 <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
                 <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>
 
@@ -136,9 +183,9 @@
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
                             <li style="direction:rtl"><a href="productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
+                            <li><a href="productArayeshi" style="direction:rtl">آرایشی</a></li>
                             <li><a href="productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
+                            <li><a href="#" style="direction:rtl">تجهیزات پزشکی</a></li>
                             <li><a href="productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
                         </ul>
                     </li>
@@ -165,123 +212,31 @@
     <!-- Page Content -->
     <div class="container">
         <!------------container------->
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+				<!--/////////////////////////cartlist////////////////////////-->
+				
+				
+				<!--/////////////////////////products////////////////////////-->
+				
+				<?php
+				$product_array = $db_handle->runQuery("SELECT * FROM products where categoryId='2' ORDER BY id ASC");
+				if (!empty($product_array)) { 
+					foreach($product_array as $key=>$value){
+				?>
+					<div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="../../images/tajhizat/1.jpg" alt="" /></a>
-                           <!-- <div class="caption">-->
-                                <p><br />نام و توضیح مختصری از محصول...</p>
-                                <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
-                                <p class="price">4,000 تومان</p>
-                                
-                           <!-- </div>-->
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <a href="#"><img src="../../images/tajhizat/6.jpg" alt="" /></a>
-                            <!-- <div class="caption">-->
-                            <p><br />نام و توضیح مختصری از محصول...</p>
-                            <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
-                            <p class="price">4,000 تومان</p>
-
-                            <!-- </div>-->
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <a href="#"><img src="../../images/tajhizat/7.jpg" alt="" /></a>
-                            <!-- <div class="caption">-->
-                            <p><br />نام و توضیح مختصری از محصول...</p>
-                            <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
-                            <p class="price">4,000 تومان</p>
-
-                            <!-- </div>-->
-                            <div class="ratings">
-                                <p class="pull-right">31 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <a href="#"><img src="../../images/tajhizat/3.jpg" alt="" /></a>
-                            <!-- <div class="caption">-->
-                            <p><br />نام و توضیح مختصری از محصول...</p>
-                            <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
-                            <p class="price">4,000 تومان</p>
-
-                            <!-- </div>-->
-                            <div class="ratings">
-                                <p class="pull-right">6 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <a href="#"><img src="../../images/tajhizat/4.jpg" alt="" /></a>
-                            <!-- <div class="caption">-->
-                            <p><br />نام و توضیح مختصری از محصول...</p>
-                            <a href="#" id="plus" style="float:left"><i class="fa fa-cart-plus fa-3x"></i></a>
-                            <p class="price">4,000 تومان</p>
-
-                            <!-- </div>-->
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4><a href="#">Like this template?</a>
-                        </h4>
-                        <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                        <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                    </div>
+						<form method="post" action="productsArayeshi.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
+							<img src="<?php echo $product_array[$key]["image"]; ?>">
+							<div><?php echo $product_array[$key]["name"]; ?></div>
+							<div><input type="text" name="quantity" value="" size="2" /><input type="image" src="../../images/cart.png"  name="cart" class="plus" style="float:left" /></div>
+							<div><p class="price"><?php echo "$".$product_array[$key]["price"]; ?></p></div>
+							
+						</form>
+						</div>
+					</div>
+				<?php
+						}
+				}
+				?>
     </div>
     <!-- /.container -->
 
@@ -306,6 +261,7 @@
     
 
     <!-- Bootstrap Core JavaScript -->
+   
     
 </body>
 

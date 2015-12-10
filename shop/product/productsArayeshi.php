@@ -84,7 +84,6 @@ switch($_GET["action"]) {
     <![endif]-->
 
 </head>
-
 <body>
 	<?php
 	//session_start();
@@ -100,12 +99,7 @@ switch($_GET["action"]) {
 		$status = "ورود";
 		$login = 0;
 	}
-	// if(isset($_SESSION["itemNumber"]) && !empty($_SESSION['itemNumber']))
-		// $itemNumber = $_SESSION['itemNumber'];
-	// else
-		// $itemNumber = 0;
 	?>
-	
 	<script>
 		login = <?php echo $login; ?>
 	</script>
@@ -224,7 +218,7 @@ switch($_GET["action"]) {
 				<!--/////////////////////////products////////////////////////-->
 				
 				<?php
-				$product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
+				$product_array = $db_handle->runQuery("SELECT * FROM products where categoryId='1' ORDER BY id ASC");
 				if (!empty($product_array)) { 
 					foreach($product_array as $key=>$value){
 				?>
@@ -243,16 +237,6 @@ switch($_GET["action"]) {
 						}
 				}
 				?>
-				
-				
-				
-				<!--/////////////////////////////////////////////////////////////-->
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4><a href="#">Like this template?</a>
-                        </h4>
-                        <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                        <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                    </div>
     </div>
     <!-- /.container -->
 
