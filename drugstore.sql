@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2015 at 10:09 AM
+-- Generation Time: Dec 10, 2015 at 08:27 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `drugstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartID` int(11) NOT NULL COMMENT '1',
+  `memberID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `number` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_persian_ci;
 
 -- --------------------------------------------------------
 
@@ -50,31 +63,43 @@ INSERT INTO `member` (`memberID`, `active`, `userName`, `password`, `email`, `na
 (43, '0', 'n', 'n', 'n@yahoo.com', 'n', 'n', 0, ''),
 (39, '0', 'l', 'l', 'n@yahoo.com', 'l', 'l', 0, ''),
 (44, '0', 'd', 'd', 'n@yahoo.com', 'd', 'd', 0, ''),
-(45, '0', 'h', 'h', 'n@yahoo.com', 'h', 'h', 0, '');
+(45, '0', 'h', 'h', 'n@yahoo.com', 'h', 'h', 0, ''),
+(47, '0', 'khoobi', '135792468', 'zahra@gmail.com', 'زهرا', 'خوبی', 123456, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_orto`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `product_orto` (
-  `product_name` varchar(50) COLLATE utf32_persian_ci NOT NULL,
-  `product_id` int(10) NOT NULL,
-  `company_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_persian_ci;
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `code` varchar(255) CHARACTER SET utf32 COLLATE utf32_persian_ci NOT NULL,
+  `image` text CHARACTER SET utf32 COLLATE utf32_persian_ci NOT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product_orto`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `product_orto` (`product_name`, `product_id`, `company_id`) VALUES
-('صندلی چرخ دار', 10101010, 50505050),
-('بازو بند طبی', 20202020, 50505050);
+INSERT INTO `products` (`id`, `name`, `code`, `image`, `price`) VALUES
+(1, 'name', '3DcAM01', '../../images/arayeshi/1.jpg', 150),
+(2, 'name', 'USB02', '../../images/arayeshi/2.jpg', 150),
+(3, 'name', 'AAA', '../../images/arayeshi/3.jpg', 150),
+(4, 'name', 'BBB', '../../images/arayeshi/4.jpg', 150),
+(5, 'name', 'ZAS', '../../images/arayeshi/5.jpg', 150);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartID`);
 
 --
 -- Indexes for table `member`
@@ -83,20 +108,30 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`memberID`);
 
 --
--- Indexes for table `product_orto`
+-- Indexes for table `products`
 --
-ALTER TABLE `product_orto`
-  ADD PRIMARY KEY (`product_id`);
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT COMMENT '1';
+--
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
