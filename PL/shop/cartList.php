@@ -133,16 +133,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" style="font-size:large; font-family:'B Mitra'">
                     <li>
-                        <a href="../index.php">صفحه اصلی <i class="fa fa-home"></i></a>
+                        <a href="../../index.php">صفحه اصلی <i class="fa fa-home"></i></a>
                     </li>
                     <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li><a href="product/productsArayeshi.php?action=type&categ=4">ارتوپدی</a></li>
+                            <li><a href="product/productsArayeshi.php?action=type&categ=1">آرایشی</a></li>
+                            <li><a href="product/productsArayeshi.php?action=type&categ=3">بهداشتی</a></li>
+                            <li><a href="product/productsArayeshi.php?action=type&categ=2">تجهیزات پزشکی</a></li>
+                            <li><a href="product/productsArayeshi.php?action=type&categ=5">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>

@@ -135,11 +135,11 @@
                     <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="shop/product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="PL/shop/product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="PL/shop/product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="PL/shop/product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="PL/shop/product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php?action=type&categ=4">ارتوپدی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php?action=type&categ=1">آرایشی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php?action=type&categ=3">بهداشتی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php?action=type&categ=2">تجهیزات پزشکی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php?action=type&categ=5">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>
