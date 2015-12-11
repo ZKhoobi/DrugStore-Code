@@ -22,7 +22,7 @@ function lgout()
 {
 	$.ajax({
 		type: "POST",
-		url: "memberHandler/logout.php",
+		url: "PL/memberHandler/logout.php",
 		data: $('#myBtn').serialize(),
 		dataType: "json",
 		success: function(msg){
@@ -41,7 +41,7 @@ function lgin()
 	error(0);
 	$.ajax({
 		type: "POST",
-		url: "memberHandler/login.php",
+		url: "PL/memberHandler/login.php",
 		data: $('#lgForm').serialize(),
 		dataType: "json",
 		success: function(msg){
