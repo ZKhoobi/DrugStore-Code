@@ -1,51 +1,4 @@
 ﻿<!DOCTYPE html>
-<?php
-session_start();
-require_once("dbController.php");
-$db_handle = new DBController();
-if(!empty($_GET["action"])) {
-switch($_GET["action"]) {
-	case "add":
-		if(!empty($_POST["quantity"])) {
-			$productByCode = $db_handle->runQuery("SELECT * FROM products WHERE code='" . $_GET["code"] . "'");
-			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"]));
-			
-			if(!empty($_SESSION["cart_item"])) {
-				if(in_array($productByCode[0]["code"],$_SESSION["cart_item"])) 
-				{
-					foreach($_SESSION["cart_item"] as $k => $v) 
-					{
-							if($productByCode[0]["code"] == $k)
-								$_SESSION["cart_item"][$k]["quantity"] = $_POST["quantity"];
-					}
-				} 
-				else 
-				{
-					$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
-				}
-			} 
-			else 
-			{
-				$_SESSION["cart_item"] = $itemArray;
-			}
-		}
-	break;
-	case "remove":
-		if(!empty($_SESSION["cart_item"])) {
-			foreach($_SESSION["cart_item"] as $k => $v) {
-					if($_GET["code"] == $k)
-						unset($_SESSION["cart_item"][$k]);				
-					if(empty($_SESSION["cart_item"]))
-						unset($_SESSION["cart_item"]);
-			}
-		}
-	break;
-	case "empty":
-		unset($_SESSION["cart_item"]);
-	break;	
-}
-}
-?>
 <html lang="en">
 
 <head>
@@ -56,25 +9,23 @@ switch($_GET["action"]) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>داروخانه دکتر آل احمد - آرایشی</title>
+    <title>داروخانه دکتر آل احمد - تماس با ما</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../fonts/farsi.css" rel="stylesheet" type="text/css"  />
-    <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/page/pageFeature.css" rel="stylesheet">
-    <link href="../../css/page/animate.css" rel="stylesheet">
-	<link href="../../css/memberHandler/lg.css" rel="stylesheet">
-    <link href="../../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" >
-    <link href="../../css/shop/shopHomepage.css" rel="stylesheet" />
+    <link href="../fonts/farsi.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/page/pageFeature.css" rel="stylesheet">
+    <link href="../css/page/animate.css" rel="stylesheet">
+	<link href="../css/memberHandler/lg.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/shop/shopHomepage.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../css/product/product.css" rel="stylesheet">
 	<!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../js/page/dropDownMenu.js" type="text/javascript"></script>
-    <script src="../../js/memberHandler/loginProduct.js" type="text/javascript"></script>
-	<script src="../../js/memberHandler/accessProfileProduct.js" type="text/javascript"></script>
-	<script src="../../js/shop/addToCart.js" type="text/javascript"></script>
+    <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/page/dropDownMenu.js" type="text/javascript"></script>
+    <script src="../js/memberHandler/loginACC.js" type="text/javascript"></script>
+	<script src="../js/memberHandler/accessProfileACC.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,7 +38,7 @@ switch($_GET["action"]) {
 
 <body>
 	<?php
-	//session_start();
+	session_start();
 	if(isset($_SESSION['name']) && !empty($_SESSION['name']) && isset($_SESSION['family']) && !empty($_SESSION['family']))
 	{
 		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
@@ -100,21 +51,16 @@ switch($_GET["action"]) {
 		$status = "ورود";
 		$login = 0;
 	}
-	// if(isset($_SESSION["itemNumber"]) && !empty($_SESSION['itemNumber']))
-		// $itemNumber = $_SESSION['itemNumber'];
-	// else
-		// $itemNumber = 0;
 	?>
-	
 	<script>
 		login = <?php echo $login; ?>
 	</script>
     <!-- Navigation -->
     <div class="container">
         <div id="header" dir="rtl">
-                <img src="../../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
+                <img src="../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
-                <button type="button" style="float:left" class="btn btn-default btncolor" id="cartIcon">سبد خرید<i class="fa fa-shopping-cart"></i>  <span class="badge" id="InCart"></span></button>
+                <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
                 <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
                 <button type="button" value="in" style="float:left" class="btn btn-default btncolor" id="myBtn"><?php echo $status; ?><i class="fa fa-lock"></i></button>
 
@@ -155,7 +101,7 @@ switch($_GET["action"]) {
 							  <div class="alert alert-danger" id="error">
 							  </div>
 							  <!-- <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> لغو</button> -->
-							  <p>عضو نیستید؟  <a href="../../memberHandler/register.php">ثبت نام</a></p>
+							  <p>عضو نیستید؟  <a href="../memberHandler/register.php">ثبت نام</a></p>
 							  <p>رمز خود را فراموش کرده اید؟ <a href="#">رمز عبور</a></p>
                           </form>
                         </div>
@@ -185,27 +131,27 @@ switch($_GET["action"]) {
                     <li>
                         <a href="../../index.php">صفحه اصلی <i class="fa fa-home"></i></a>
                     </li>
-                    <li class="dropdown active">
+                    <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="#" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li style="direction:rtl"><a href="../shop/product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
+                            <li><a href="../shop/product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
+                            <li><a href="../shop/product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
+                            <li><a href="../shop/product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">سوالات دارویی <i class="fa fa-question-circle"></i></a>
                     </li>
                     <li>
-                        <a href="../../aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
+                        <a href="../aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
+                    </li>
+                    <li class="active">
+                        <a href="#">تماس با ما <i class="fa fa-phone"></i></a>
                     </li>
                     <li>
-                        <a href="../../contact/contact.php">تماس با ما <i class="fa fa-phone"></i></a>
-                    </li>
-                    <li>
-                        <a href="../../comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
+                        <a href="../comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
                     </li>
                 </ul>
             </div>
@@ -217,43 +163,31 @@ switch($_GET["action"]) {
    
     <!-- Page Content -->
     <div class="container">
-        <!------------container------->
-				<!--/////////////////////////cartlist////////////////////////-->
-				
-				
-				<!--/////////////////////////products////////////////////////-->
-				
-				<?php
-				$product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
-				if (!empty($product_array)) { 
-					foreach($product_array as $key=>$value){
-				?>
-					<div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-						<form method="post" action="productsArayeshi.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
-							<img src="<?php echo $product_array[$key]["image"]; ?>">
-							<div><?php echo $product_array[$key]["name"]; ?></div>
-							<div><input type="text" name="quantity" value="" size="2" /><input type="image" src="../../images/cart.png"  name="cart" class="plus" style="float:left" /></div>
-							<div><p class="price"><?php echo "$".$product_array[$key]["price"]; ?></p></div>
-							
-						</form>
-						</div>
-					</div>
-				<?php
-						}
-				}
-				?>
-				
-				
-				
-				<!--/////////////////////////////////////////////////////////////-->
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4><a href="#">Like this template?</a>
-                        </h4>
-                        <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                        <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                    </div>
-    </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+            <img src="../images/map.png" alt=" آدرس: تهران - خیابان شهید باهنر - رو به روی شهر کتاب - پلاک 110" />
+            <br />
+            <br />
+            <section>
+                <h3> آدرس&nbsp;<i class="fa fa-street-view fa-lg"></i></h3>
+                <p>تجریش - خیابان شهید باهنر - رو به روی شهر کتاب - پلاک 110 - داروخانه دکتر سادات آل احمد</p>
+                <h3>تلفن تماس&nbsp;<i class="fa fa-phone-square fa-lg"></i></h3>
+                <p>22801560</p>
+                <h3>نمابر&nbsp;<i class="fa fa-fax fa-lg"></i></h3>
+                <p>22801558</p>
+                <h3>ساعات کاری&nbsp;<i class="fa fa-clock-o fa-lg"></i></h3>
+                <p>همه روزه (به جز ایام تعطیل) 8:30 الی 13:30 - 15:30 الی 20:30</p>
+
+            </section>
+
+        </div>
+        </div>
+        <div class="col-lg-1">
+        </div> 
+        
+            
+    
     <!-- /.container -->
 
     <div class="container">
@@ -277,7 +211,6 @@ switch($_GET["action"]) {
     
 
     <!-- Bootstrap Core JavaScript -->
-   
     
 </body>
 

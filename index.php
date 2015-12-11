@@ -12,20 +12,20 @@
     <title>داروخانه دکتر آل احمد - صفحه اصلی</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="fonts/farsi.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="css/page/pageFeature.css" rel="stylesheet">
-    <link href="css/page/animate.css" rel="stylesheet">
-	<link href="css/memberHandler/lg.css" rel="stylesheet">
-    <link href="css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/shop/shopHomepage.css" rel="stylesheet">
+    <link href="PL/fonts/farsi.css" rel="stylesheet" type="text/css" />
+    <link href="PL/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="PL/css/page/pageFeature.css" rel="stylesheet">
+    <link href="PL/css/page/animate.css" rel="stylesheet">
+	<link href="PL/css/memberHandler/lg.css" rel="stylesheet">
+    <link href="PL/css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="PL/css/shop/shopHomepage.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 	<!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/page/dropDownMenu.js" type="text/javascript"></script>
-    <script src="js/memberHandler/login.js" type="text/javascript"></script>
-	<script src="js/memberHandler/accessProfile.js" type="text/javascript"></script>
+    <script src="PL/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="PL/js/page/dropDownMenu.js" type="text/javascript"></script>
+    <script src="PL/js/memberHandler/login.js" type="text/javascript"></script>
+	<script src="PL/js/memberHandler/accessProfile.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,7 +58,7 @@
     <!-- Navigation -->
     <div class="container">
         <div id="header" dir="rtl">
-                <img src="images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
+                <img src="PL/images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
                 <button type="button" style="float:left" class="btn btn-default btncolor">سبد خرید<i class="fa fa-shopping-cart"></i></button>
                 <button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
@@ -136,23 +136,23 @@
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
                             <li style="direction:rtl"><a href="shop/product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="shop/product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="shop/product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="shop/product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="shop/product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li><a href="PL/shop/product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
+                            <li><a href="PL/shop/product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
+                            <li><a href="PL/shop/product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
+                            <li><a href="PL/shop/product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">سوالات دارویی <i class="fa fa-question-circle"></i></a>
                     </li>
                     <li>
-                        <a href="aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
+                        <a href="PL/aboutUs/aboutUs.php">درباره ما <i class="fa fa-info-circle"></i></a>
                     </li>
                     <li>
-                        <a href="contact/contact.php">تماس با ما <i class="fa fa-phone"></i></a>
+                        <a href="PL/contact/contact.php">تماس با ما <i class="fa fa-phone"></i></a>
                     </li>
                     <li>
-                        <a href="comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
+                        <a href="PL/comment/comment.php">نظرات <i class="fa fa-commenting"></i></a>
                     </li>
                 </ul>
             </div>
@@ -278,11 +278,11 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="images/slide-image.jpg" alt="">
+                                    <img class="slide-image" src="PL/images/slide-image.jpg" alt="">
                                     
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="images/slide-image.jpg" alt="">
+                                    <img class="slide-image" src="PL/images/slide-image.jpg" alt="">
                                     
                                 </div>
                                 <div class="item">
