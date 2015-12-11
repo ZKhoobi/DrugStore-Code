@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2015 at 08:27 AM
+-- Generation Time: Dec 11, 2015 at 11:24 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -36,35 +36,49 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(10) NOT NULL,
+  `name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'آرایشی'),
+(2, 'تجهیزات پزشکی'),
+(3, 'لوازم بهداشتی'),
+(4, 'ارتوپدی'),
+(5, 'مکمل ها');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
 CREATE TABLE `member` (
-  `memberID` int(11) NOT NULL,
-  `active` char(1) NOT NULL DEFAULT '0',
-  `userName` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL DEFAULT '',
-  `email` varchar(250) NOT NULL DEFAULT '',
-  `name` varchar(50) NOT NULL DEFAULT '',
-  `familyName` varchar(50) NOT NULL DEFAULT '',
-  `phoneNumber` int(15) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `userName` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `familyname` varchar(20) NOT NULL,
+  `phoneNumber` int(15) NOT NULL,
+  `address` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`memberID`, `active`, `userName`, `password`, `email`, `name`, `familyName`, `phoneNumber`, `address`) VALUES
-(27, '0', 'niousha', '123', 'n@yahoo.com', 'نیوشا', 'عطار', 123, ''),
-(37, '0', 'c', 'c', 'a@yahoo.com', 'c', 'c', 123, ''),
-(35, '0', 'b', 'b', 'a@yahoo.com', 'b', 'b', 123, ''),
-(36, '0', 'a', 'a', 'a@yahoo.com', 'a', 'a', 123, ''),
-(43, '0', 'n', 'n', 'n@yahoo.com', 'n', 'n', 0, ''),
-(39, '0', 'l', 'l', 'n@yahoo.com', 'l', 'l', 0, ''),
-(44, '0', 'd', 'd', 'n@yahoo.com', 'd', 'd', 0, ''),
-(45, '0', 'h', 'h', 'n@yahoo.com', 'h', 'h', 0, ''),
-(47, '0', 'khoobi', '135792468', 'zahra@gmail.com', 'زهرا', 'خوبی', 123456, '');
+INSERT INTO `member` (`id`, `active`, `userName`, `password`, `email`, `name`, `familyname`, `phoneNumber`, `address`) VALUES
+(1, 0, 'niosha', '123', 'niosha.atar@drugstor', 'نیوشا', 'عطار', 9876543, 'میدان . کوچه . پلاک . واحد');
 
 -- --------------------------------------------------------
 
@@ -75,21 +89,40 @@ INSERT INTO `member` (`memberID`, `active`, `userName`, `password`, `email`, `na
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `code` varchar(255) CHARACTER SET utf32 COLLATE utf32_persian_ci NOT NULL,
   `image` text CHARACTER SET utf32 COLLATE utf32_persian_ci NOT NULL,
-  `price` double NOT NULL
+  `price` double NOT NULL,
+  `categoryId` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `code`, `image`, `price`) VALUES
-(1, 'name', '3DcAM01', '../../images/arayeshi/1.jpg', 150),
-(2, 'name', 'USB02', '../../images/arayeshi/2.jpg', 150),
-(3, 'name', 'AAA', '../../images/arayeshi/3.jpg', 150),
-(4, 'name', 'BBB', '../../images/arayeshi/4.jpg', 150),
-(5, 'name', 'ZAS', '../../images/arayeshi/5.jpg', 150);
+INSERT INTO `products` (`id`, `name`, `image`, `price`, `categoryId`) VALUES
+(1, 'name', '../../images/arayeshi/1.jpg', 150, 1),
+(2, 'name', '../../images/arayeshi/2.jpg', 150, 1),
+(3, 'name', '../../images/arayeshi/3.jpg', 150, 1),
+(4, 'name', '../../images/arayeshi/4.jpg', 150, 1),
+(5, 'name', '../../images/arayeshi/5.jpg', 150, 1),
+(6, 'ترازو', '../../images/tajhizat/1.jpg', 230909, 2),
+(7, 'ترازو طرح دار', '../../images/tajhizat/2.jpg', 23424, 2),
+(8, 'ترازو شیشه ای', '../../images/tajhizat/3.jpg', 122200, 2),
+(9, 'دماسنج گوش', '../../images/tajhizat/4.jpg', 232000, 2),
+(10, 'دماسنج سطح بدن', '../../images/tajhizat/5.jpg', 34230, 2),
+(11, 'دستگاه تست قند خون', '../../images/tajhizat/6.jpg', 45600, 2),
+(12, 'هواساز', '../../images/tajhizat/7.jpg', 33300, 2),
+(13, 'دستگاه تست قند خون', '../../images/tajhizat/8.jpg', 23454, 2),
+(14, 'مچ بند پا', '../../images/ortopedy/1.jpg', 232323, 4),
+(15, 'ساق بند', '../../images/ortopedy/2.jpg', 3434, 4),
+(16, 'زانو بند', '../../images/ortopedy/3.jpg', 3333, 4),
+(17, 'زانو بند', '../../images/ortopedy/4.jpg', 343434, 4),
+(18, 'کمبربند طبی', '../../images/ortopedy/5.jpg', 343435, 4),
+(19, 'مچ بند', '../../images/ortopedy/6.jpg', 44334, 4),
+(20, 'مچ بند', '../../images/ortopedy/7.jpg', 3434343, 4),
+(21, 'مچ بند', '../../images/ortopedy/8.jpg', 545646, 4),
+(22, 'مچ بند پا', '../../images/ortopedy/9.jpg', 56567, 4),
+(23, 'ویتامین دی', '../../images/mokamel/1.png', 2300, 5),
+(24, 'مسواک برقی', '../../images/behdashti/1.jpg', 345678, 3);
 
 --
 -- Indexes for dumped tables
@@ -99,19 +132,29 @@ INSERT INTO `products` (`id`, `name`, `code`, `image`, `price`) VALUES
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartID`);
+  ADD PRIMARY KEY (`cartID`),
+  ADD KEY `memberID` (`memberID`),
+  ADD KEY `productID` (`productID`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`memberID`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `userPass` (`userName`,`password`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoryId` (`categoryId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -123,15 +166,37 @@ ALTER TABLE `products`
 ALTER TABLE `cart`
   MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT COMMENT '1';
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
