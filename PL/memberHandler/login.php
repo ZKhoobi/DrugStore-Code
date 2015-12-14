@@ -29,7 +29,10 @@ else{
 		$_SESSION['username']=$row['userName'];
 		$query = mysql_query("UPDATE member SET active = '1' WHERE userName = '$_POST[usrname]' AND password = '$_POST[psw]' ") or die(mysql_error());
 		$temp = $name . ' ' . $familyName;
-		die(msg(1, $temp));
+		if($_POST["usrname"]=="admin")
+			die(msg(2, $temp));
+		else
+			die(msg(1, $temp));
 	}
 	else{
 		die(msg(0,"نام کاربری یا رمز عبور اشتباه است."));

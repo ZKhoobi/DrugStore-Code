@@ -3,10 +3,11 @@
 	$("#cartIcon").click(function(){
 		location.replace("../cartList.php");
 	});
-	// $('.plus').click(function(){
+	 $('.plus').click(function(){
+		 location.replace("productsArayeshi.php");
 		// addItem();
 		// e.preventDefault();
-	// });
+	});
 	// $('#buy').submit(function(e){
 		// addItem();
 		// e.preventDefault();

@@ -136,11 +136,11 @@
                     <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li><a href="../shop/product/productsArayeshi.php?action=type&categ=4">ارتوپدی</a></li>
-                            <li><a href="../shop/product/productsArayeshi.php?action=type&categ=1">آرایشی</a></li>
-                            <li><a href="../shop/product/productsArayeshi.php?action=type&categ=3">بهداشتی</a></li>
-                            <li><a href="../shop/product/productsArayeshi.php?action=type&categ=2">تجهیزات پزشکی</a></li>
-                            <li><a href="../shop/product/productsArayeshi.php?action=type&categ=5">مکمل های دارویی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php?categ=4">ارتوپدی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php?categ=1">آرایشی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php?categ=3">بهداشتی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php?categ=2">تجهیزات پزشکی</a></li>
+                            <li><a href="../shop/product/productsArayeshi.php?categ=5">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>

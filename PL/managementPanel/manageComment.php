@@ -22,6 +22,7 @@
 	<!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../js/memberHandler/logoutM.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,11 +34,30 @@
 </head>
 
 <body>
+	<?php
+	session_start();
+	if(isset($_SESSION['name']) && !empty($_SESSION['name']))
+	{
+		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
+		$status = "خروج";
+		$login = 1;
+	}
+	else
+	{
+		$user = "حساب شخصی";
+		$status = "ورود";
+		$login = 0;
+	}
+	?>
+	<script>
+		login = <?php echo $login; ?>
+	</script>
     <!-- Navigation -->
     <div class="container">
                 <img src="../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
-                <button type="button"  style="float:left" class="btn btn-default btncolor" onclick="myclose();">
+				<button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
+                <button type="button"  style="float:left" class="btn btn-default btncolor" id="myBtn">
                     خروج<i class="fa fa-lock"></i></button>
                 
                 <!-- Modal -->

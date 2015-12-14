@@ -135,11 +135,11 @@
                     <li class="dropdown ">
                         <a class="dropdown-toggle " data-toggle="dropdown" href="#"> محصولات <i class="fa fa-medkit"></i></a>
                         <ul class="dropdown-menu ">
-                            <li style="direction:rtl"><a href="product/productsOrtopedy.php" style="direction:rtl">ارتوپدی</a></li>
-                            <li><a href="product/productsArayeshi.php" style="direction:rtl">آرایشی</a></li>
-                            <li><a href="product/productsBehdashti.php" style="direction:rtl">بهداشتی</a></li>
-                            <li><a href="product/productsTajhizat.php" style="direction:rtl">تجهیزات پزشکی</a></li>
-                            <li><a href="product/productsMokamel.php" style="direction:rtl">مکمل های دارویی</a></li>
+                            <li><a href="#">ارتوپدی</a></li>
+                            <li><a href="#">آرایشی</a></li>
+                            <li><a href="#">بهداشتی</a></li>
+                            <li><a href="#">تجهیزات پزشکی</a></li>
+                            <li><a href="#">مکمل های دارویی</a></li>
                         </ul>
                     </li>
                     <li>

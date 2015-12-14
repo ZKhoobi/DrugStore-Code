@@ -55,7 +55,10 @@ function lgin()
 				
 				error(1,msg.txt);
 			}
-			
+			else if(parseInt(msg.status)==2)
+			{
+				managementPanel();
+			}
 			hideshow('loading',0);
 		}
 	});
@@ -84,4 +87,8 @@ function successout(act,txt)
 	if(txt) $('#myBtn').html('ورود<i class="fa fa-lock"></i>');
 	if(txt) $('#lgname').html('حساب شخصی<i class="fa fa-user"></i>');
 	location.reload(true);
+}
+function managementPanel()
+{
+	location.replace("PL/managementPanel/manageProduct.php");
 }

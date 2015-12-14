@@ -6,7 +6,7 @@ class BL_Product{
 		$this->db_handle = new DBController();
 	}
 
-	private $db_handle, $categoryId;
+	private $db_handle;
 	public function initialCartItem()
 	{
 		session_start();
@@ -47,19 +47,23 @@ class BL_Product{
 						}
 					}
 				break;
-				case "type":
-					$this->categoryId=$_GET["categ"];
-				break;
 				case "empty":
 					unset($_SESSION["cart_item"]);
 				break;	
 			}
 		}
 	}
-	public function getProductArray()
+	// public function productPresentation()
+	// {
+		// //session_start();
+		// if(!empty($_GET["test"]) && $_GET["test"]=="type")
+			// $this->categoryId=$_GET["categ"];
+		// return $this->categoryId;
+	// }
+	public function getProductArray($categoryId)
 	{
 		$product_array = $this->db_handle->runQuery("SELECT * FROM products where categoryId='". 
-		$this->categoryId . "' ORDER BY id ASC");
+		$categoryId . "' ORDER BY id ASC");
 		return $product_array;
 	}
 }

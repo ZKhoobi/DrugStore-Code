@@ -22,7 +22,7 @@ function lgout()
 {
 	$.ajax({
 		type: "POST",
-		url: "PL/memberHandler/logout.php",
+		url: "../memberHandler/logout.php",
 		data: $('#myBtn').serialize(),
 		dataType: "json",
 		success: function(msg){
@@ -96,7 +96,7 @@ function successout(act,txt)
 	if(act==0)
 		location.reload(true);
 	else if(act==1)
-		location.replace("../../index");
+		location.replace("../../index.php");
 }
 function managementPanel()
 {

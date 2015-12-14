@@ -18,11 +18,13 @@
     <link href="../css/page/animate.css" rel="stylesheet">
     <link href="../css/bootstrap/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
     <link href="../css/shop/shopHomepage.css" rel="stylesheet">
+	<link href="../css/shop/addPro.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<!--JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../js/memberHandler/login.js" type="text/javascript"></script>
+    <script src="../js/memberHandler/logoutM.js" type="text/javascript"></script>
+	<script src="../js/shop/addNewProduct.js" type="text/javascript"></script>
     <!--<script src="js/jquery.js" type="text/javascript"></script>-->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,11 +36,30 @@
 </head>
 
 <body>
+	<?php
+	session_start();
+	if(isset($_SESSION['name']) && !empty($_SESSION['name']))
+	{
+		$user = $_SESSION['name'] . ' ' . $_SESSION['family'] ;
+		$status = "خروج";
+		$login = 1;
+	}
+	else
+	{
+		$user = "حساب شخصی";
+		$status = "ورود";
+		$login = 0;
+	}
+	?>
+	<script>
+		login = <?php echo $login; ?>
+	</script>
     <!-- Navigation -->
     <div class="container">
                 <img src="../images/logo.png" alt="Nevia Premium Template" width="70" height="78" />
                         <font size="5"><b style="font-family:IranNastaliq">داروخانه دکتر سادات آل احمد</b></font>
-                <button type="button"  style="float:left" class="btn btn-default btncolor" onclick="myclose();">
+				<button type="button" style="float:left" class="btn btn-default btncolor" id="lgname"><?php echo $user; ?><i class="fa fa-user"></i></button>
+                <button type="button"  style="float:left" class="btn btn-default btncolor" id="myBtn">
                     خروج<i class="fa fa-lock"></i>
                 </button>
                 
@@ -139,46 +160,86 @@
             <div class="col-md-8 col-sm-8" >
                 <div class="panel panel-default" style="background-color:#a7d4a7" id="add">
                     <h1 style="text-align:center">افزودن کالای جدید</h1>
-                    <div class="panel-body">        
-                        <form role="form">
-                            <div class="col-sm-12 col-lg-12 col-md-12 " style=" font-size:large">
-                                        <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> نام محصول:</label>
-                                            <input class="form-control" type="text" name="" value="" />
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> نام شرکت سازنده:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                    <div class="panel-body">
+						<form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data"> 
+<div class="form-group col-md-3 col-sm-3 col-lg-3">
+                                            <label> نام کالا :</label>
+                                            <input class="form-control" type="text" name="pname" value="" />
                                         </div> 
                                         <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> بار کد محصول:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                                            <label> بار کد کالا :</label>
+                                            <input class="form-control" type="text" name="pcode" value="" />
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> تاریخ تولید:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                                            <label> قیمت کالا :</label>
+                                            <input class="form-control" type="text" name="pprice" value="" />
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> تاریخ انقضا:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                                            <label>دسته کالا</label>
+											<select name="pcateg" class="form-control">
+												<option value="arayeshi">آرایشی</option>
+												<option value="behdashti">بهداشتی</option>
+												<option value="ortopedy">ارتوپدی</option>
+												<option value="mokamel">مکمل دارویی</option>
+												<option value="tajhizat">تجهیزات پزشکی</option>
+											</select>
+                                        </div>
+						
+
+						<div class="form-group col-md-3 col-sm-3 col-lg-3">													
+						<label>بار گذاری عکس کالا :</label><br/>
+						<input name="userImage" id="userImage" type="file" class="inputFile" />
+						<br/>
+						<input type="submit" id="sabt" value="تایید و افزودن" class="btnSubmit" />
+						</div>
+							
+						</form>
+<div class="alert alert-danger" id="error">
+							</div>
+							<div class="alert alert-success" id="successful">
+							</div>
+                        <!--<form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+                            <div class="col-sm-12 col-lg-12 col-md-12 " style=" font-size:large">
+                                        <div class="form-group col-md-3 col-sm-3 col-lg-3">
+                                            <label> نام کالا :</label>
+                                            <input class="form-control" type="text" name="pname" value="" />
+                                        </div> 
+                                        <div class="form-group col-md-3 col-sm-3 col-lg-3">
+                                            <label> بار کد کالا :</label>
+                                            <input class="form-control" type="text" name="pcode" value="" />
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> قیمت محصول:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                                            <label> قیمت کالا :</label>
+                                            <input class="form-control" type="text" name="pprice" value="" />
                                         </div>
                                         <div class="form-group col-md-3 col-sm-3 col-lg-3">
-                                            <label> شماره نمایندگی توزیع:</label>
-                                            <input class="form-control" type="text" name="" value="" />
+                                            <label>دسته کالا</label>
+											<select name="pcateg" class="form-control">
+												<option value="1">آرایشی</option>
+												<option value="2">بهداشتی</option>
+												<option value="3">ارتوپدی</option>
+												<option value="4">مکمل دارویی</option>
+												<option value="5">تجهیزات پزشکی</option>
+											</select>
                                         </div>
-                                    </div>
-                                <div class="col-md-2" style="padding-top:3%;">
-                                    <button type="submit" class="btn btn-default left">تایید و افزودن</button>
-                                </div>                   
-                            </form>       
+										<div class="form-group col-md-3 col-sm-3 col-lg-3">
+											<label>بارگذاری عکس کالا :</label><br/>
+											<input name="userImage" id="userImage" type="file"  />
+											<input type="submit" value="تایید و افزودن" id="sabt" class="btn btn-default left" />
+											<div id="targetLayer">
+											
+											</div>
+										</div>-->
+                                        
+                            <!--</div>-->
+                                
+							
+                             
                         </div>
                     </div>
-
-
+<!---------------------------------------------------------------------------------->
+					
+<!---------------------------------------------------------------------------------->
                 <div class="panel panel-default" style="background-color:#a7d4a7" id="edit">
               <h1 style="text-align:center">افزودن تبلیغات</h1>
                 <div class="panel-body">        
@@ -274,7 +335,7 @@
     <!-- Bootstrap Core JavaScript -->
     
     <!-- log out from management -->
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         function myclose()
         {
             var retVal = confirm("آیا می خواهید از پنل مدیریت خارج شوید؟")
@@ -282,7 +343,7 @@
                 window.close(this);
             }
         }
-    </script>
+    </script>-->
     
 </body>
 
